@@ -63,6 +63,8 @@ const Chat: React.FC = () => {
   const messageListRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const API_KEY = 'sk-zk2a25f41cc835440b0d2ac912b92da794a677faa6970365';  //zzz
+  const API_URL = 'https://api.zhizengzeng.com/v1/chat/completions';  //zzz
   const [dalleSettings, setDalleSettings] = useState<DalleSettings>({
     imageCount: 1,
     imageSize: '1024x1024',
