@@ -63,10 +63,6 @@ const Chat: React.FC = () => {
   const messageListRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
-  const API_KEY = 'sk-zk2a25f41cc835440b0d2ac912b92da794a677faa6970365';  //zzz
-  // const API_KEY = 'b496c98f-f1f0-492e-a26e-e770b2f74b34';  //火山
-  const API_URL = 'https://api.zhizengzeng.com/v1/chat/completions';  //zzz
-  // const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
   const [dalleSettings, setDalleSettings] = useState<DalleSettings>({
     imageCount: 1,
     imageSize: '1024x1024',
