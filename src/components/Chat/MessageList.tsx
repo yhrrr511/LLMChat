@@ -273,7 +273,7 @@ const MessageList: React.FC<MessageListProps> = ({
                     ))}
                   </Grid>
                   <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#666' }}>
-                    由 DALL-E 3 生成的图片
+                    由 大模型 生成的图片
                   </Typography>
                 </Box>
               ) : (

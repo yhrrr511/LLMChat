@@ -54,6 +54,7 @@ const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
   const navigate = useNavigate();
+  const [money, setMoney] = useState<number>(0);
   // const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [showCopyHint, setShowCopyHint] = useState(false);
@@ -126,6 +127,22 @@ const Chat: React.FC = () => {
     setOnlyShowThinking(event.target.checked);
   };
 
+  const fetchMoney = async () => {
+    try {
+      const response = await fetch('https://api.zhizengzeng.com/v1/dashboard/billing/credit_grants',{
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setMoney(data.grants.available_amount);
+    } catch (error) {
+      console.error('获取余额失败:', error);
+    }
+  };
+
   // 配置marked
   useEffect(() => {
     const markedOptions = {
@@ -150,6 +167,12 @@ const Chat: React.FC = () => {
     // @ts-ignore
     marked.setOptions(markedOptions);
   }, []);
+
+  useEffect(() => {
+    // 获取余额
+    fetchMoney();
+  }, []);
+  
 
   // 自动滚动和高亮
   useEffect(() => {
@@ -329,7 +352,7 @@ const Chat: React.FC = () => {
     e.preventDefault();
 
     // 检查是否有图片且模型是否为 gpt-4o
-    if (imagePreviews.length > 0 && !['gpt-4o-mini','gpt-4o','o1-preview','gpt-4.5-preview','gpt-4.1','gpt-4.1-mini','claude-3-7-sonnet-20250219','claude-3-7-sonnet-thinking',
+    if (imagePreviews.length > 0 && !['gpt-4o-mini','gpt-4o','o1-preview','gpt-4.5-preview','gpt-4.1','o3','o4-mini','gpt-4.1-mini','claude-3-7-sonnet-20250219','claude-3-7-sonnet-thinking',
       'claude-3-5-sonnet-20241022','grok-3'
     ].includes(selectedModel)) {
       alert('图片内容需要选择 gpt系列/claude系列/grok系列 模型');
@@ -543,6 +566,7 @@ const Chat: React.FC = () => {
       // console.log('请求结束:',loading)
       setLoading(false);
     }
+    fetchMoney();
   };
 
   // 取消请求的处理函数
@@ -676,6 +700,7 @@ const Chat: React.FC = () => {
           handleModelChange={handleModelChange}
           onlyShowThinking={onlyShowThinking}
           handleOnlyShowThinkingChange={handleOnlyShowThinkingChange}
+          money={money}
         />
 
         <Box sx={{ 

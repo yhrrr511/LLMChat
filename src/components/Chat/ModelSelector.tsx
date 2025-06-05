@@ -22,6 +22,7 @@ interface ModelSelectorProps {
   handleModelChange: (event: any) => void;
   onlyShowThinking: boolean;
   handleOnlyShowThinkingChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  money: number;
 }
 
 const modelOptions = [
@@ -33,9 +34,12 @@ const modelOptions = [
   { value: 'gpt-4.1-mini', label: 'gpt-4.1-mini($0.4，$1.6)' },
   { value: 'gpt-image-1', label: 'gpt-image-1(1k*1k的图0.011美元)' },
   { value: 'o3', label: 'gpt-o3($10，$40)' },
+  { value: 'o4-mini', label: 'gpt-o4-mini($1.1，$4.4)' },
   { value: 'deepseek-reasoner', label: 'DeepSeek-R1($0.55，$1.1)' },
   { value: 'deepseek-chat', label: 'DeepSeek-V3($0.27，$0.55)' },
   { value: 'deepseek-coder', label: 'DeepSeek-coder($0.27，$0.55)' },
+  { value: 'claude-opus-4-20250514', label: 'claude-opus-4($15，$75)' },
+  { value: 'claude-opus-4-20250514-thinking', label: 'claude-opus-4-thinking($15，$75)' },
   { value: 'claude-3-7-sonnet-20250219', label: 'claude3.7-sonnet($3，$15)' },
   { value: 'claude-3-7-sonnet-thinking', label: 'claude3.7-sonnet-thinking($3，$15)' },
   { value: 'claude-3-5-sonnet-20241022', label: 'claude3.5-sonnet($3，$15)' },
@@ -51,6 +55,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
   handleModelChange,
   onlyShowThinking,
   handleOnlyShowThinkingChange,
+  money,
 }) => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
@@ -81,6 +86,9 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
         >
           <MenuIcon />
         </IconButton>
+        <div className='money' style={{position: 'absolute', right: '120px', top: '20px'}}>
+          余额：{money}
+        </div>
         {!isMobile && (
           <div className='logout-button'>
             <button
@@ -110,6 +118,14 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                 backgroundColor: '#f8f9fa',
                 '&:hover': { backgroundColor: '#f0f0f0' },
               }}
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 300,  // 设置下拉菜单的最大高度
+                    overflow: 'auto',  // 启用滚动
+                  },
+                },
+              }}
             >
               {modelOptions.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -117,7 +133,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                 </MenuItem>
               ))}
             </Select>
-            {(selectedModel === 'claude-3-7-sonnet-thinking' || selectedModel === 'deepseek-reasoner') && (
+            {(selectedModel === 'claude-3-7-sonnet-thinking' || selectedModel === 'deepseek-reasoner' || selectedModel === 'claude-opus-4-20250514-thinking') && (
               <Box sx={{ position: 'absolute', right: '-200px' }}>
                 <FormControlLabel
                   control={
