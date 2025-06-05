@@ -40,6 +40,8 @@ const modelOptions = [
   { value: 'deepseek-coder', label: 'DeepSeek-coder($0.27，$0.55)' },
   { value: 'claude-opus-4-20250514', label: 'claude-opus-4($15，$75)' },
   { value: 'claude-opus-4-20250514-thinking', label: 'claude-opus-4-thinking($15，$75)' },
+  { value: 'claude-sonnet-4-20250514', label: 'claude-sonnet-4($3，$15)' },
+  { value: 'claude-sonnet-4-20250514-thinking', label: 'claude-sonnet-4-thinking($3，$15)' },
   { value: 'claude-3-7-sonnet-20250219', label: 'claude3.7-sonnet($3，$15)' },
   { value: 'claude-3-7-sonnet-thinking', label: 'claude3.7-sonnet-thinking($3，$15)' },
   { value: 'claude-3-5-sonnet-20241022', label: 'claude3.5-sonnet($3，$15)' },
@@ -133,7 +135,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                 </MenuItem>
               ))}
             </Select>
-            {(selectedModel === 'claude-3-7-sonnet-thinking' || selectedModel === 'deepseek-reasoner' || selectedModel === 'claude-opus-4-20250514-thinking') && (
+            {(selectedModel === 'claude-3-7-sonnet-thinking' || selectedModel === 'deepseek-reasoner' || selectedModel === 'claude-opus-4-20250514-thinking' || selectedModel === 'claude-sonnet-4-20250514-thinking') && (
               <Box sx={{ position: 'absolute', right: '-200px' }}>
                 <FormControlLabel
                   control={

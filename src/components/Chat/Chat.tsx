@@ -352,8 +352,10 @@ const Chat: React.FC = () => {
     e.preventDefault();
 
     // 检查是否有图片且模型是否为 gpt-4o
-    if (imagePreviews.length > 0 && !['gpt-4o-mini','gpt-4o','o1-preview','gpt-4.5-preview','gpt-4.1','o3','o4-mini','gpt-4.1-mini','claude-3-7-sonnet-20250219','claude-3-7-sonnet-thinking',
-      'claude-3-5-sonnet-20241022','grok-3'
+    if (imagePreviews.length > 0 && !['gpt-4o-mini','gpt-4o','o1-preview','gpt-4.5-preview','gpt-4.1','o3','o4-mini','gpt-4.1-mini',
+      'claude-3-7-sonnet-20250219','claude-3-7-sonnet-thinking','claude-3-5-sonnet-20241022','grok-3',
+      'claude-sonnet-4-20250514','claude-sonnet-4-20250514-thinking','claude-opus-4-20250514-thinking',
+      'claude-sonnet-4-20250514-thinking'
     ].includes(selectedModel)) {
       alert('图片内容需要选择 gpt系列/claude系列/grok系列 模型');
       return; // 停止发送
